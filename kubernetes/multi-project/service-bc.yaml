@@ -27,3 +27,19 @@ spec:
   - port: 5000
     protocol: TCP
     targetPort: 5000
+---
+# This service is currently not functioning properly,
+# because of the b and c network policies.
+apiVersion: v1
+kind: Service
+metadata:
+  name: word-picker-bc
+  namespace: word-picker-bc-al
+spec:
+  type: ClusterIP
+  selector:
+    app: word-picker
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
