@@ -10,3 +10,7 @@ spec:
   ingress:
   - from:
     - podSelector: {}
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: word-picker-bc-al
