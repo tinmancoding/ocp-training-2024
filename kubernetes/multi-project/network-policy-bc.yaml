@@ -16,3 +16,22 @@ spec:
         matchLabels:
           letter: b
           app: word-picker
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-only-from-c
+  namespace: word-picker-bc-al
+spec:
+  podSelector:
+    matchLabels:
+      letter: c
+      app: word-picker
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          letter: c
+          app: word-picker
