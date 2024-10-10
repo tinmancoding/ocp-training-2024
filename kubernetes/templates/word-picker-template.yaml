@@ -53,3 +53,15 @@ objects:
         - name: options-config-map
           configMap:
             name: word-picker-options-${APP_POSTFIX}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: word-picker-${APP_POSTFIX}
+  spec:
+    type: ClusterIP
+    selector:
+      app: word-picker-${APP_POSTFIX}
+    ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
