@@ -14,6 +14,8 @@ objects:
   kind: ConfigMap
   metadata:
     name: word-picker-options-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
   data:
     custom_options.txt: ${CUSTOM_OPTIONS}
 - apiVersion: apps/v1
@@ -57,6 +59,8 @@ objects:
   kind: Service
   metadata:
     name: word-picker-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
   spec:
     type: ClusterIP
     selector:
