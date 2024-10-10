@@ -8,6 +8,7 @@ spec:
   port:
     targetPort: 5000
   tls:
+    insecureEdgeTerminationPolicy: Redirect
     certificate: |
       -----BEGIN CERTIFICATE-----
       MIIDWzCCAkMCFCAx79gZJVMl3XX4kIqtP1oQCLhCMA0GCSqGSIb3DQEBCwUAMGox
