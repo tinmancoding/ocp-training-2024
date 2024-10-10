@@ -16,6 +16,10 @@ spec:
         matchLabels:
           letter: b
           app: word-picker
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network.openshift.io/policy-group: ingress
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -35,3 +39,7 @@ spec:
         matchLabels:
           letter: c
           app: word-picker
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network.openshift.io/policy-group: ingress
