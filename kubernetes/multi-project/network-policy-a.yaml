@@ -14,3 +14,8 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: word-picker-bc-al
+      podSelector:
+        matchLabels:
+          letter: b
+          app: word-picker
+    
