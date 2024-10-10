@@ -9,6 +9,9 @@ parameters:
 - name: CUSTOM_OPTIONS
   description: Add the words to pick from here separated with whitespace.
   value: "alpha beta gamma delta epsilon"
+- name: REPLICAS
+  description: Number of replicas to start for the word-picker app.
+  value: "2"
 objects:
 - apiVersion: v1
   kind: ConfigMap
@@ -27,7 +30,7 @@ objects:
       app-postfix: ${APP_POSTFIX}
       component: word-picker
   spec:
-    replicas: 2
+    replicas: ${{REPLICAS}}
     selector:
       matchLabels:
         app: word-picker-${APP_POSTFIX}
