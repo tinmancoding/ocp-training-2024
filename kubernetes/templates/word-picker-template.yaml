@@ -1,0 +1,17 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: word-picker
+parameters:
+- name: APP_POSTFIX
+  description: This postix is appended to every name and tag.
+  required: true
+objects:
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: word-picker-options-${APP_POSTFIX}
+  data:
+    custom_options.txt: |
+      alpha
+
