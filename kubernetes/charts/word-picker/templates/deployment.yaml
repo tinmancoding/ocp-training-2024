@@ -44,13 +44,19 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
+          {{- if .Values.customOptions }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
+            - name: options-config-map
+              mountPath: /code/config
+          env:
+            - name: OPTIONS_FILE
+              value: /code/config/custom_options.txt
           {{- end }}
-      {{- with .Values.volumes }}
+      {{- if .Values.customOptions }}
       volumes:
-        {{- toYaml . | nindent 8 }}
+      - name: options-config-map
+        configMap:
+          name: {{ include "word-picker.fullname" . }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
