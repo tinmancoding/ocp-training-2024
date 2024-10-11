@@ -12,6 +12,12 @@ parameters:
 - name: REPLICAS
   description: Number of replicas to start for the word-picker app.
   value: "2"
+- name: IMAGE_NAME
+  description: The name of the Container Image to use
+  value: tinmancoding/word-picker
+- name: IMAGE_TAG
+  description: The version tag of the Container Image to use
+  value: v2
 objects:
 - apiVersion: v1
   kind: ConfigMap
@@ -45,7 +51,7 @@ objects:
       spec:
         containers:
         - name: word-picker
-          image: tinmancoding/word-picker:v2
+          image: ${IMAGE_NAME}:${IMAGE_TAG}
           ports:
           - containerPort: 5000
           volumeMounts:
