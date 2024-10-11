@@ -35,6 +35,8 @@ objects:
       app: word-picker-${APP_POSTFIX}
       app-postfix: ${APP_POSTFIX}
       component: word-picker
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"word-picker-${APP_POSTFIX}:deployed"},"fieldPath":"spec.template.spec.containers[?(@.name==\"word-picker\")].image"}]'
   spec:
     replicas: ${{REPLICAS}}
     selector:
@@ -51,7 +53,7 @@ objects:
       spec:
         containers:
         - name: word-picker
-          image: ${IMAGE_NAME}:${IMAGE_TAG}
+          image: wardsco/sleep
           ports:
           - containerPort: 5000
           volumeMounts:
@@ -97,3 +99,19 @@ objects:
       - namespaceSelector:
           matchLabels:
             network.openshift.io/policy-group: ingress
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: word-picker-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+  spec:
+    tags:
+      - name: deployed
+        from:
+          kind: DockerImage
+          name: ${IMAGE_NAME}:${IMAGE_TAG}
+        importPolicy:
+          scheduled: true
+        referencePolicy:
+          type: Local
